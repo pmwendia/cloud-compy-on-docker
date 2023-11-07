@@ -22,12 +22,16 @@ RUN . /opt/conda/etc/profile.d/conda.sh && \
     conda clean --all --yes
 
 WORKDIR /app/workspace
-COPY . ./app/workspace/
+
+COPY . .
+
+COPY CloudComPy_Conda310_Linux64_20231026.tgz .
+
 RUN mkdir -p /opt/cloudcompy && \
     # wget "https://www.simulation.openfields.fr/phocadownload/cloudcompy_conda39_linux64_20211208.tgz" && \
     # cp -r CloudComPy_Conda310_Linux64_20231026.tgz ./ && \
-    tar -xvzf "CloudComPy_Conda310_Linux64_20231026.tgz" -C /opt/cloudcompy && \
-    rm "CloudComPy_Conda310_Linux64_20231026.tgz"
+    tar -xvzf "CloudComPy_Conda310_Linux64_20231026.tgz" -C /opt/cloudcompy 
+    # rm "CloudComPy_Conda310_Linux64_20231026.tgz"
 
 RUN apt-get update && apt-get install -y libgl1 libomp5 
 RUN apt-get update && apt install -y git sudo cmake gcc software-properties-common libpython3-dev pybind11-dev libgl1-mesa-dev libglu1-mesa-dev 
