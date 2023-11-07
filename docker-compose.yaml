@@ -10,3 +10,5 @@ services:
       - ~/CloudComPy/test:/root/CloudComPy
       - .:/app/notebooks
     entrypoint: /bin/bash
+    ports:
+      - "8888:8888"
