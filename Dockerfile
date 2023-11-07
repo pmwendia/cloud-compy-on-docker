@@ -47,7 +47,7 @@ cd /opt/cloudcompy/CloudComPy310 &&\
 . bin/condaCloud.sh activate CloudComPy310 &&\
 python --version &&\
 cp -r ./doc/samples /app/cloudcompy/notebooks &&\
-cd /app/workspace/CloudCompare-PythonPlugin &&\
+cd /app/cloudcompy/workspace/CloudCompare-PythonPlugin &&\
     pip install wrapper/cccorelib && \
     pip install wrapper/pycc && \
     pip install git+https://github.com/Amsterdam-AI-Team/Urban_PointCloud_Processing.git#egg=upcp
