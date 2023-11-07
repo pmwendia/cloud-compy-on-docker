@@ -21,10 +21,11 @@ RUN . /opt/conda/etc/profile.d/conda.sh && \
     mamba install "boost=1.74" "cgal=5.4" cmake ffmpeg "gdal=3.5" jupyterlab jupyter notebook laszip "matplotlib=3.5" "mysql=8.0" "numpy=1.22" "opencv=4.5" "openmp=8.0" "pcl=1.12" "pdal=2.4" "psutil=5.9" pybind11 "qhull=2020.2" "qt=5.15.4" "scipy=1.8" sphinx_rtd_theme spyder tbb tbb-devel "xerces-c=3.2" &&\
     conda clean --all --yes
 
-
+WORKDIR /app/workspace
+COPY . ./app/workspace/
 RUN mkdir -p /opt/cloudcompy && \
     # wget "https://www.simulation.openfields.fr/phocadownload/cloudcompy_conda39_linux64_20211208.tgz" && \
-    cp -r CloudComPy_Conda310_Linux64_20231026.tgz ./ && \
+    # cp -r CloudComPy_Conda310_Linux64_20231026.tgz ./ && \
     tar -xvzf "CloudComPy_Conda310_Linux64_20231026.tgz" -C /opt/cloudcompy && \
     rm "CloudComPy_Conda310_Linux64_20231026.tgz"
 
@@ -39,11 +40,13 @@ export QT_QPA_PLATFORM=offscreen\n\
 cd /opt/cloudcompy/CloudComPy39/doc/PythonAPI_test\n\
 ctest" > /entrypoint.sh && chmod +x /entrypoint.sh
 
-WORKDIR /app/workspace
+# WORKDIR /app/workspace
 
 RUN git clone https://github.com/tmontaigu/CloudCompare-PythonPlugin.git
 
 WORKDIR /app/notebooks
+
+RUN git clone https://github.com/Amsterdam-AI-Team/Urban_PointCloud_Processing.git
 
 ENTRYPOINT ["/entrypoint.sh"]
 
