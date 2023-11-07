@@ -36,22 +36,28 @@ RUN mkdir -p /opt/cloudcompy && \
 RUN apt-get update && apt-get install -y libgl1 libomp5 
 RUN apt-get update && apt install -y git sudo cmake gcc software-properties-common libpython3-dev pybind11-dev libgl1-mesa-dev libglu1-mesa-dev 
 
+
+# WORKDIR /app/workspace
+
+# RUN git clone https://github.com/tmontaigu/CloudCompare-PythonPlugin.git
+
+WORKDIR /app/notebooks
+
+# RUN git clone https://github.com/Amsterdam-AI-Team/Urban_PointCloud_Processing.git
+# cd /opt/cloudcompy/CloudComPy310/doc/PythonAPI_test\n\
+# ctest
+# pip install 
+
 RUN echo "#!/bin/bash\n\
 . /opt/conda/etc/profile.d/conda.sh\n\
 cd /opt/cloudcompy/CloudComPy310\n\
 . bin/condaCloud.sh activate CloudComPy310\n\
+cp -r ./doc/samples /app/notebooks \n\
+python --version \n\
+mamba --version \n\
+conda --version \n\
 export QT_QPA_PLATFORM=offscreen\n\
-cd /opt/cloudcompy/CloudComPy310/doc/PythonAPI_test\n\
-ctest" > /entrypoint.sh && chmod +x /entrypoint.sh
-
-# WORKDIR /app/workspace
-
-RUN git clone https://github.com/tmontaigu/CloudCompare-PythonPlugin.git
-
-WORKDIR /app/notebooks
-
-RUN git clone https://github.com/Amsterdam-AI-Team/Urban_PointCloud_Processing.git
-
+jupyter notebook --ip 0.0.0.0 --port 8889 --allow-root --no-browser --notebook-dir=/app/notebooks" > /entrypoint.sh && chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
-EXPOSE 8888 80 443
+EXPOSE 8888 8889 8899 80 443
