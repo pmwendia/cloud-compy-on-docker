@@ -1,0 +1,12 @@
+version: '3'
+services:
+  cloudcompy:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: CloudComPy:v1.0
+    container_name: cloudcompy
+    volumes:
+      - ~/CloudComPy/test:/root/CloudComPy
+      - .:/app/notebooks
+    entrypoint: /bin/bash
