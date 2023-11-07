@@ -39,9 +39,9 @@ RUN apt-get update && apt install -y git sudo cmake gcc software-properties-comm
 RUN echo "#!/bin/bash\n\
 . /opt/conda/etc/profile.d/conda.sh\n\
 cd /opt/cloudcompy/CloudComPy310\n\
-. bin/condaCloud.sh activate CloudComPy301\n\
+. bin/condaCloud.sh activate CloudComPy310\n\
 export QT_QPA_PLATFORM=offscreen\n\
-cd /opt/cloudcompy/CloudComPy39/doc/PythonAPI_test\n\
+cd /opt/cloudcompy/CloudComPy310/doc/PythonAPI_test\n\
 ctest" > /entrypoint.sh && chmod +x /entrypoint.sh
 
 # WORKDIR /app/workspace
