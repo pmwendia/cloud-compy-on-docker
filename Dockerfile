@@ -60,7 +60,8 @@ RUN echo "#!/bin/bash\n\
 . /opt/conda/etc/profile.d/conda.sh\n\
 cd /opt/cloudcompy/CloudComPy310\n\
 . bin/condaCloud.sh activate CloudComPy310\n\
-export QT_QPA_PLATFORM=offscreen\n\
+export QT_QPA_PLATFORM=offscreen "> /entrypoint.sh && chmod +x /entrypoint.sh
+
 ENTRYPOINT ["/entrypoint.sh"]
 # jupyter notebook --ip 0.0.0.0 --port 8889 --allow-root --no-browser --notebook-dir=/app/notebooks" > /entrypoint.sh && chmod +x /entrypoint.sh
 
