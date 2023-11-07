@@ -9,7 +9,6 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /app/notebooks
 
 RUN . /opt/conda/etc/profile.d/conda.sh && \
     conda activate && \
@@ -40,7 +39,11 @@ export QT_QPA_PLATFORM=offscreen\n\
 cd /opt/cloudcompy/CloudComPy39/doc/PythonAPI_test\n\
 ctest" > /entrypoint.sh && chmod +x /entrypoint.sh
 
+WORKDIR /app/workspace
+
 RUN git clone https://github.com/tmontaigu/CloudCompare-PythonPlugin.git
+
+WORKDIR /app/notebooks
 
 ENTRYPOINT ["/entrypoint.sh"]
 
