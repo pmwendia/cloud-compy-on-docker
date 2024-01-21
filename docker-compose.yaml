@@ -12,4 +12,4 @@ services:
     entrypoint: /bin/bash
     # command: jupyter notebook --ip 0.0.0.0 --port 8889 --allow-root --no-browser --notebook-dir=/app/notebooks
     ports:
-      - "8888:8888"
+      - "8888:8888" 
