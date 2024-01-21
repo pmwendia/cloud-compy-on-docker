@@ -1,0 +1,21 @@
+name: Clone CloudCompare Repository
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  clone_repository:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout current repository
+      uses: actions/checkout@v2
+
+    - name: Clone CloudCompare Repository
+      run: |
+        git clone --recursive https://github.com/CloudCompare/CloudCompare
+        mv CloudCompare .
+        # mv CloudCompare/.git .
+        # rm -rf CloudCompare
