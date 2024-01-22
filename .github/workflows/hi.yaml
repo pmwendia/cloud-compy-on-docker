@@ -16,6 +16,6 @@ jobs:
     - name: Clone CloudCompare Repository
       run: |
         git clone --recursive https://github.com/CloudCompare/CloudCompare
-        mv CloudCompare .
+        cp -r CloudCompare .
         # mv CloudCompare/.git .
         # rm -rf CloudCompare
