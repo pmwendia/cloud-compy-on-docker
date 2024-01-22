@@ -25,7 +25,7 @@ jobs:
     #     docker-compose build cloudcompy
     - name: Build Docker Image
       run: |
-        docker-compose build --platform linux/amd64 --verbose cloudcompy
+        docker-compose build --platform linux/amd64 --no-cache cloudcompy
 
 
     # - name: Push Docker Image
