@@ -55,11 +55,11 @@ jobs:
         pip wheel --no-deps wrapper/cccorelib
         pip wheel --no-deps wrapper/pycc
 
-        mv CloudCompare-PythonRuntime ./python/runtime
-        
-        # pip install wrapper/cccorelib
-        # pip install wrapper/pycc
-        # pip install git+https://github.com/Amsterdam-AI-Team/Urban_PointCloud_Processing.git#egg=upcp
+      # mv CloudCompare-PythonRuntime ./python/runtime
+      
+      # pip install wrapper/cccorelib
+      # pip install wrapper/pycc
+      # pip install git+https://github.com/Amsterdam-AI-Team/Urban_PointCloud_Processing.git#egg=upcp
 
     - name: Commit and push changes
       run: |
