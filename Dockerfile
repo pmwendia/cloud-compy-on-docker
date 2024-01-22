@@ -48,6 +48,8 @@ cd /opt/cloudcompy/CloudComPy310 &&\
 python --version &&\
 cp -r ./doc/samples /app/cloudcompy/notebooks &&\
 cd /app/cloudcompy/workspace/CloudCompare-PythonPlugin &&\
+    pip wheel --no-deps wrapper/cccorelib &&\
+    pip wheel --no-deps wrapper/pycc &&\
     pip install wrapper/cccorelib && \
     pip install wrapper/pycc && \
     pip install git+https://github.com/Amsterdam-AI-Team/Urban_PointCloud_Processing.git#egg=upcp
