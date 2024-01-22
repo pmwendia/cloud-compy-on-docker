@@ -18,7 +18,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        sudo apt-get update && sudo apt-get upgrade
+        sudo apt-get update 
         sudo apt-get install -y build-essential  wget libgl1 libomp5  git sudo cmake gcc software-properties-common libpython3-dev pybind11-dev libgl1-mesa-dev libglu1-mesa-dev
         sudo apt-get clean 
         sudo rm -rf /var/lib/apt/lists/* 
