@@ -1,4 +1,4 @@
-name: Build and Push Docker Image
+name: Run Commands
 
 on:
   push:
@@ -10,22 +10,46 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Check Out Code
+    - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Login to Docker Hub
-      uses: docker/login-action@v1
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_PASSWORD }}
-
-    # - name: Build Docker Image
-      
-    #   run: |
-    #     docker-compose build cloudcompy
-    - name: Build Docker Image
+    - name: Install dependencies
       run: |
-        docker-compose build cloudcompy
+        sudo apt-get update \
+        && apt-get install -y build-essential \
+        && apt-get install -y wget \
+        && apt-get update && apt-get install -y libgl1 libomp5 \
+        && apt-get update && apt install -y git sudo cmake gcc software-properties-common libpython3-dev pybind11-dev libgl1-mesa-dev libglu1-mesa-dev \
+        && apt-get clean \
+        && rm -rf /var/lib/apt/lists/* 
+        
+    - name: Set up Miniconda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        activate-environment: CloudComPy310
+        # environment-file: environment.yml
+        python-version: 3.10
+        auto-activate-base: false
+
+    - name: Install dependencies
+      run: |
+        conda config --add channels defaults
+        conda config --add channels conda-forge
+        conda config --set channel_priority flexible
+        conda install mamba
+        mamba install -y "boost=1.74" "cgal=5.4" cmake ffmpeg "gdal=3.5" jupyterlab jupyter notebook laszip "matplotlib=3.5" "mysql=8.0" "numpy=1.22" "opencv=4.5" "openmp=8.0" "pcl=1.12" "pdal=2.4" "psutil=5.9" pybind11 "qhull=2020.2" "qt=5.15.4" "scipy=1.8" sphinx_rtd_theme spyder tbb tbb-devel "xerces-c=3.2"
+        conda clean --all --yes
+
+    - name: Clone repository and install Python packages
+      run: |
+        git clone https://github.com/tmontaigu/CloudCompare-PythonPlugin.git
+        cd CloudCompare-PythonRuntime
+        pip wheel --no-deps wrapper/cccorelib
+        pip wheel --no-deps wrapper/pycc
+        
+        # pip install wrapper/cccorelib
+        # pip install wrapper/pycc
+        # pip install git+https://github.com/Amsterdam-AI-Team/Urban_PointCloud_Processing.git#egg=upcp
 
     - name: Commit and push changes
       run: |
@@ -34,9 +58,46 @@ jobs:
         git add .
         git commit -m "Add CloudComPy python runtime"
         git push
-    # - name: Push Docker Image
-    #   uses: docker/build-push-action@v2
-    #   with:
-    #     context: .
-    #     push: true
-    #     tags: saintpm/cloudcompy:v1.0
+        
+# name: Build and Push Docker Image
+
+# on:
+#   push:
+#     branches:
+#       - main
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#     - name: Check Out Code
+#       uses: actions/checkout@v2
+
+#     - name: Login to Docker Hub
+#       uses: docker/login-action@v1
+#       with:
+#         username: ${{ secrets.DOCKERHUB_USERNAME }}
+#         password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+#     # - name: Build Docker Image
+      
+#     #   run: |
+#     #     docker-compose build cloudcompy
+#     - name: Build Docker Image
+#       run: |
+#         docker-compose build cloudcompy
+
+    # - name: Commit and push changes
+    #   run: |
+    #     git config --global user.name 'Peter Mwendia'
+    #     git config --global user.email 'ptermwendia@gmail.com'
+    #     git add .
+    #     git commit -m "Add CloudComPy python runtime"
+    #     git push
+#     # - name: Push Docker Image
+#     #   uses: docker/build-push-action@v2
+#     #   with:
+#     #     context: .
+#     #     push: true
+#     #     tags: saintpm/cloudcompy:v1.0
