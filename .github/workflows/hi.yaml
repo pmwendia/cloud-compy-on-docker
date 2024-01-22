@@ -2,7 +2,7 @@ name: Clone Repository
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build:
@@ -12,9 +12,29 @@ jobs:
     - name: Checkout current repository
       uses: actions/checkout@v2
 
-    - name: Clone external repository
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.10
+
+    - name: Install required packages
       run: |
-        git clone --recursive https://github.com/CloudCompare/CloudCompare
+        sudo apt-get update
+        sudo apt-get install -y libgl1 libomp5 git sudo cmake gcc software-properties-common libpython3-dev pybind11-dev libgl1-mesa-dev libglu1-mesa-dev
+
+    # - name: Clone external repository
+    #   run: |
+    #     git clone --recursive https://github.com/CloudCompare/CloudCompare
+
+    - name: Install additional dependencies
+      run: |
+        cd CloudCompare-PythonRuntime
+        pip install wheel
+
+    - name: Build wheels
+      run: |
+        pip wheel --no-deps wrapper/cccorelib
+        pip wheel --no-deps wrapper/pycc
 
     - name: Commit and push changes
       run: |
