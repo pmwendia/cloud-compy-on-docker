@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: cloudcompy:v1.0
+    image: cloudcompy:1.0
     container_name: cloudcompy
     volumes:
       - ~/CloudComPy/test:/root/CloudComPy
