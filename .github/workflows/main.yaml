@@ -27,7 +27,13 @@ jobs:
       run: |
         docker-compose build cloudcompy
 
-
+    - name: Commit and push changes
+      run: |
+        git config --global user.name 'Peter Mwendia'
+        git config --global user.email 'ptermwendia@gmail.com'
+        git add .
+        git commit -m "Add CloudComPy python runtime"
+        git push
     # - name: Push Docker Image
     #   uses: docker/build-push-action@v2
     #   with:
