@@ -44,7 +44,7 @@ jobs:
 
     - name: Clone repository 
       run: |
-        git clone https://github.com/tmontaigu/CloudCompare-PythonPlugin.git
+        git clone https://github.com/tmontaigu/CloudCompare-PythonRuntime.git
         
     - name: Install Python packages
       run: |
