@@ -12,6 +12,9 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+      
+    - name: Enable sudo
+      run: sudo echo
 
     - name: Install dependencies
       run: |
