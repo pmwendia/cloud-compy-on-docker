@@ -1,21 +1,25 @@
-name: Clone CloudCompare Repository
+name: Clone Repository
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
-  clone_repository:
+  build:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout current repository
       uses: actions/checkout@v2
 
-    - name: Clone CloudCompare Repository
+    - name: Clone external repository
       run: |
         git clone --recursive https://github.com/CloudCompare/CloudCompare
-        cp -r CloudCompare .
-        # mv CloudCompare/.git .
-        # rm -rf CloudCompare
+
+    - name: Commit and push changes
+      run: |
+        git config --global user.name 'Peter Mwendia'
+        git config --global user.email 'ptermwendia@gmail.com'
+        git add .
+        git commit -m "Add CloudCompare repository"
+        git push
