@@ -37,12 +37,14 @@ jobs:
         conda config --add channels conda-forge
         conda config --set channel_priority flexible
         conda install mamba
+        conda init
         conda activate CloudComPy310
         mamba install -y "boost=1.74" "cgal=5.4" cmake ffmpeg "gdal=3.5" jupyterlab jupyter notebook laszip "matplotlib=3.5" "mysql=8.0" "numpy=1.22" "opencv=4.5" "openmp=8.0" "pcl=1.12" "pdal=2.4" "psutil=5.9" pybind11 "qhull=2020.2" "qt=5.15.4" "scipy=1.8" sphinx_rtd_theme spyder tbb tbb-devel "xerces-c=3.2"
         conda clean --all --yes
 
     - name: Clone repository and install Python packages
       run: |
+        conda init
         conda activate CloudComPy310
         git clone https://github.com/tmontaigu/CloudCompare-PythonPlugin.git
         cd CloudCompare-PythonRuntime
