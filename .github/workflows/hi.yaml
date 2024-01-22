@@ -1,45 +1,45 @@
-name: Clone Repository
+# name: Clone Repository
 
-on:
-  push:
-    branches: [main]
+# on:
+#   push:
+#     branches: [main]
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
 
-    steps:
-    - name: Checkout current repository
-      uses: actions/checkout@v2
+#     steps:
+#     - name: Checkout current repository
+#       uses: actions/checkout@v2
 
-    # - name: Set up Python
-    #   uses: actions/setup-python@v2
-    #   with:
-    #     python-version: 3.10.8
-    #     architecture: x64
+#     # - name: Set up Python
+#     #   uses: actions/setup-python@v2
+#     #   with:
+#     #     python-version: 3.10.8
+#     #     architecture: x64
 
-    - name: Install required packages
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y libgl1 libomp5 git sudo cmake gcc software-properties-common libpython3-dev pybind11-dev libgl1-mesa-dev libglu1-mesa-dev
+#     - name: Install required packages
+#       run: |
+#         sudo apt-get update
+#         sudo apt-get install -y libgl1 libomp5 git sudo cmake gcc software-properties-common libpython3-dev pybind11-dev libgl1-mesa-dev libglu1-mesa-dev
 
-    - name: Clone external repository
-      run: |
-          git clone https://github.com/tmontaigu/CloudCompare-PythonRuntime
+#     - name: Clone external repository
+#       run: |
+#           git clone https://github.com/tmontaigu/CloudCompare-PythonRuntime
 
-    #     git clone --recursive https://github.com/CloudCompare/CloudCompare
+#     #     git clone --recursive https://github.com/CloudCompare/CloudCompare
 
-    # - name: Install additional dependencies
-    #   run: |
-    #     cd CloudCompare-PythonRuntime
-    #     pip install wheel
-    #     pip wheel --no-deps wrapper/cccorelib
-    #     pip wheel --no-deps wrapper/pycc
+#     # - name: Install additional dependencies
+#     #   run: |
+#     #     cd CloudCompare-PythonRuntime
+#     #     pip install wheel
+#     #     pip wheel --no-deps wrapper/cccorelib
+#     #     pip wheel --no-deps wrapper/pycc
 
-    # - name: Commit and push changes
-    #   run: |
-    #     git config --global user.name 'Peter Mwendia'
-    #     git config --global user.email 'ptermwendia@gmail.com'
-    #     git add .
-    #     git commit -m "Add CloudCompare repository"
-    #     git push
+#     # - name: Commit and push changes
+#     #   run: |
+#     #     git config --global user.name 'Peter Mwendia'
+#     #     git config --global user.email 'ptermwendia@gmail.com'
+#     #     git add .
+#     #     git commit -m "Add CloudCompare repository"
+#     #     git push
