@@ -35,8 +35,8 @@ COPY CloudComPy_Conda310_Linux64_20231219.tgz .
 RUN mkdir -p /opt/cloudcompy && \
     # wget "https://www.simulation.openfields.fr/phocadownload/cloudcompy_conda39_linux64_20211208.tgz" && \
     # cp -r CloudComPy_Conda310_Linux64_20231219.tgz ./ && \
-    tar -xvzf "CloudComPy_Conda310_Linux64_20231219.tgz" -C /opt/cloudcompy \
-    rm "CloudComPy_Conda310_Linux64_20231219.tgz"
+    tar -xvzf "CloudComPy_Conda310_Linux64_20231219.tgz" -C /opt/cloudcompy
+    # rm "CloudComPy_Conda310_Linux64_20231219.tgz"
 
 # WORKDIR /app/cloudcompy/workspace
 
