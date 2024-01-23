@@ -36,4 +36,5 @@ jobs:
       with:
         context: .
         push: true
-        tags: saintpm/cloudcompy:1.0
+        tags: saintpm/cloudcompy:2.0
+        # tags: saintpm/cloudcompy:1.0
