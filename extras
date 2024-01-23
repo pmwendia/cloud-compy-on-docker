@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# !sudo apt-get install qtbase5-dev qtchooser qt5-qmake qtbase5-dev-tools libqt5concurrent5
+# !sudo apt-get install cmake pkg-config
+# !sudo apt-get install mesa-utils libglu1-mesa-dev freeglut3-dev mesa-common-dev
+# !sudo apt-get install libglew-dev libglfw3-dev libglm-dev
+# !sudo apt-get install libao-dev libmpg123-dev
+# !sudo apt install freeglut3-dev
+# !sudo apt install libqt5opengl5
+
+# !sudo apt install libpython3-dev pybind11-dev
+
+# !sudo apt-get update -qq
+
+# !sudo apt-get install -qy cmake ninja-build \
+#     libqt5svg5-dev libqt5opengl5-dev qttools5-dev qttools5-dev-tools libqt5websockets5-dev \
+#     libtbb-dev \
+#     libavcodec-dev libavformat-dev libavutil-dev libswscale-dev \
+#     libboost-program-options-dev libboost-thread-dev \
+#     libeigen3-dev \
+#     libcgal-dev libcgal-qt5-dev libgdal-dev libpcl-dev \
+#     libdlib-dev libproj-dev libxerces-c-dev xvfb libjsoncpp-dev
+
+
+sudo apt-get install -y qtbase5-dev qtchooser qt5-qmake qtbase5-dev-tools libqt5concurrent5 cmake pkg-config mesa-utils libglu1-mesa-dev freeglut3-dev mesa-common-dev
+
+sudo apt install -y libpython3-dev pybind11-dev libglew-dev libglfw3-dev libglm-dev libao-dev libmpg123-dev freeglut3-dev libqt5opengl5 freeglut3-dev
+
+sudo apt-get update -qq
+
+# sudo apt-get install -qy cmake ninja-build \
+#     libqt5svg5-dev libqt5opengl5-dev qttools5-dev qttools5-dev-tools libqt5websockets5-dev \
+#     libtbb-dev \
+#     libavcodec-dev libavformat-dev libavutil-dev libswscale-dev \
+#     libboost-program-options-dev libboost-thread-dev \
+#     libeigen3-dev \
+#     libcgal-dev libcgal-qt5-dev libgdal-dev libpcl-dev \
+#     libdlib-dev libproj-dev libxerces-c-dev xvfb libjsoncpp-dev
+
+
+# sudo apt-get update -q
+
+    
+sudo apt-get install -y cmake ninja-build\
+    libqt5svg5-dev libqt5opengl5-dev qt5-default qttools5-dev qttools5-dev-tools libqt5websockets5-dev\
+    libtbb-dev\
+    libavcodec-dev libavformat-dev libavutil-dev libswscale-dev\
+    libboost-program-options-dev libboost-thread-dev\
+    libeigen3-dev\
+    libcgal-dev libcgal-qt5-dev libgdal-dev libpcl-dev\
+    libdlib-dev libproj-dev libxerces-c-dev xvfb libjsoncpp-dev liblaszip-dev
