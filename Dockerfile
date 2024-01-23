@@ -4,7 +4,7 @@ ENV CONDA_NO_PLUGINS=true
 
 # Install base utilities
 RUN apt-get update \
-    && apt-get install -y build-essential  wget  libgl1 libomp5 git sudo cmake gcc software-properties-common libpython3-dev pybind11-dev libgl1-mesa-dev libglu1-mesa-dev cmake ninja-build  libqt5svg5-dev libqt5opengl5-dev qt5-default qttools5-dev qttools5-dev-tools libqt5websockets5-dev libtbb-dev libavcodec-dev libavformat-dev libavutil-dev libswscale-dev libboost-program-options-dev libboost-thread-dev libeigen3-dev libcgal-dev libcgal-qt5-dev libgdal-dev libpcl-dev libdlib-dev libproj-dev libxerces-c-dev xvfb libjsoncpp-dev
+    && apt-get install -y build-essential  wget  libgl1 libomp5 git sudo cmake gcc software-properties-common libpython3-dev pybind11-dev libgl1-mesa-dev libglu1-mesa-dev cmake ninja-build  libqt5svg5-dev libqt5opengl5-dev qttools5-dev qttools5-dev-tools libqt5websockets5-dev libtbb-dev libavcodec-dev libavformat-dev libavutil-dev libswscale-dev libboost-program-options-dev libboost-thread-dev libeigen3-dev libcgal-dev libcgal-qt5-dev libgdal-dev libpcl-dev libdlib-dev libproj-dev libxerces-c-dev xvfb libjsoncpp-dev
 
 RUN apt-get update -qq
 
