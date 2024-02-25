@@ -1,4 +1,4 @@
-name: Build and Push Docker Image
+name: Build and Push Oracle Database Free
 
 on:
   push:
@@ -6,35 +6,71 @@ on:
       - main
 
 jobs:
-  build:
+  build-and-push:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Check Out Code
-      uses: actions/checkout@v2
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
-    - name: Login to Docker Hub
-      uses: docker/login-action@v1
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
 
-    - name: Build Docker Image
-      run: |
-        docker-compose build cloudcompy
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
 
-    # - name: Commit and push changes
-    #   run: |
-    #     git config --global user.name 'Peter Mwendia'
-    #     git config --global user.email 'ptermwendia@gmail.com'
-    #     git add .
-    #     git commit -m "Add CloudComPy python runtime"
-    #     git push
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    - name: Push Docker Image
-      uses: docker/build-push-action@v2
-      with:
-        context: .
-        push: true
-        tags: saintpm/cloudcompy:2.0
-        # tags: saintpm/cloudcompy:1.0
+      - name: Pull Oracle Database Free image from Oracle Container Registry
+        run: |
+          docker pull container-registry.oracle.com/database/free:latest
+          docker tag container-registry.oracle.com/database/free:latest ${{ secrets.DOCKERHUB_USERNAME }}/oracle-free:latest
+
+      - name: Push Oracle Database Free image to Docker Hub
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/oracle-free:latest
+
+
+# name: Build and Push Docker Image
+
+# on:
+#   push:
+#     branches:
+#       - main
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#     - name: Check Out Code
+#       uses: actions/checkout@v2
+
+#     - name: Login to Docker Hub
+#       uses: docker/login-action@v1
+#       with:
+#         username: ${{ secrets.DOCKERHUB_USERNAME }}
+#         password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+#     - name: Build Docker Image
+#       run: |
+#         docker-compose build cloudcompy
+
+#     # - name: Commit and push changes
+#     #   run: |
+#     #     git config --global user.name 'Peter Mwendia'
+#     #     git config --global user.email 'ptermwendia@gmail.com'
+#     #     git add .
+#     #     git commit -m "Add CloudComPy python runtime"
+#     #     git push
+
+#     - name: Push Docker Image
+#       uses: docker/build-push-action@v2
+#       with:
+#         context: .
+#         push: true
+#         tags: saintpm/cloudcompy:2.0
+#         # tags: saintpm/cloudcompy:1.0
