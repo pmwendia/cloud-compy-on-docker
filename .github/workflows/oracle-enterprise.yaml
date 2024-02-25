@@ -1,0 +1,42 @@
+name: Build and Push Oracle Enterprise Database
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    env:
+      OCR_USERNAME: ${{ secrets.OCR_USERNAME }}
+      OCR_PASSWORD: ${{ secrets.OCR_PASSWORD }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Log in to Oracle Container Registry
+        run: echo $OCR_PASSWORD | docker login -u $OCR_USERNAME --password-stdin container-registry.oracle.com
+
+      - name: Pull Oracle Enterprise Database image
+        run: docker pull container-registry.oracle.com/database/enterprise:latest
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      - name: Tag Oracle Enterprise Database image for Docker Hub
+        run: docker tag container-registry.oracle.com/database/enterprise:latest ${{ secrets.DOCKERHUB_USERNAME }}/oracle-enterprise:latest
+
+      - name: Push Oracle Enterprise Database image to Docker Hub
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/oracle-enterprise:latest
